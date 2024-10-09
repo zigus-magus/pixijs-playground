@@ -17,24 +17,22 @@ export class MixedTextImageTool {
             ['emoji', 'text', 'emoji'],
             ['emoji', 'emoji', 'emoji'],
             ['emoji', 'emoji', 'text'],
-            ['text', 'emoji', 'text']
+            ['text', 'emoji', 'text'],
+            ['text', 'text', 'text'],
+            ['text', 'text', 'emoji']
         ];
         const config = this.getRandomElement(configurations);
         const fontSize = Math.floor(Math.random() * 20) + 20;
-
+        let text = '';
         config.forEach(type => {
-            let text = ''
-
-
             if (type === 'text') {
-                this.getRandomElement(this.textOptions);
+                text += this.getRandomElement(this.textOptions) + ' ';
             } else {
-                this.getRandomElement(this.emojiOptions);
+                text += this.getRandomElement(this.emojiOptions) + ' ';
             }
-
-            const text =
-            container.addChild(new PIXI.Text(, { fontSize }));
         });
+
+        container.addChild(new PIXI.Text(text,{ fontSize }));
 
         return container;
     }
