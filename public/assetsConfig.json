@@ -1,0 +1,12 @@
+{
+  "resources": [
+    {
+      "assetName": "card_front",
+      "assetPath": "/assets/card_front.png"
+    },
+    {
+      "assetName": "card_back",
+      "assetPath": "/assets/card_back.png"
+    }
+  ]
+}
