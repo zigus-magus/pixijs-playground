@@ -1,5 +1,6 @@
 import {TextField} from "../components/TextField";
 import {Button} from "../components/Button";
+import {Sprite} from "../components/Sprite";
 
 
 export class SceneBuilder {
@@ -9,6 +10,7 @@ export class SceneBuilder {
 
         this.builderConfig = {
             Button: Button,
+            Sprite: Sprite,
             TextField: TextField,
         };
     }
@@ -24,13 +26,19 @@ export class SceneBuilder {
     createSceneObject(config) {
         const ObjectType = this.builderConfig[config.type];
         if (ObjectType) {
-            try {
-                const texture = config.texture ? this.assetsLoader.getTexture(config.texture) : null;
+            const texture = config.texture ? this.assetsLoader.getTexture(config.texture) : null;
+            const object = new ObjectType(config, texture);
 
-                return new ObjectType(config, texture);
-            } catch (error) {
-                console.error(`Failed to create object: ${config.name}`, error);
+            if (config.children && config.children.length > 0) {
+                config.children.forEach(childConfig => {
+                    const child = this.createSceneObject(childConfig);
+                    if (child) {
+                        object.addChild(child);
+                    }
+                });
             }
+
+            return object;
         } else {
             console.error(`Unknown object type: ${config.type}`);
         }

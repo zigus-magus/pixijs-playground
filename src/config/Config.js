@@ -30,3 +30,60 @@ export const CardsSceneConfig = {
         }
     ]
 }
+
+export const lobbySceneConfig = {
+    elements: [
+        {
+            name: 'CardsButton',
+            type: 'Button',
+            text: 'Cards',
+            width: 300,
+            height: 60,
+            x: 400,
+            y: 300,
+            texture: 'button_wide'
+        },
+        {
+            name: 'TextsButton',
+            type: 'Button',
+            text: 'Texts',
+            width: 300,
+            height: 60,
+            x: 400,
+            y: 400,
+            texture: 'button_wide'
+        },
+        {
+            name: 'ParticlesButton',
+            type: 'Button',
+            text: 'Particles',
+            width: 300,
+            height: 60,
+            x: 400,
+            y: 500,
+            texture: 'button_wide'
+        }
+    ]
+};
+
+export const homeButtonConfig = {
+    name: 'HomeButton',
+    type: 'Button',
+    x: 1100,
+    y: 20,
+    width: 60,
+    height: 60,
+    texture: 'button_narrow',
+    children: [
+        {
+            name: 'HomeIcon',
+            type: 'Sprite',
+            texture: 'icon_home_black',
+            width: 40,
+            height: 40,
+            x: 30,
+            y: 30,
+            anchor: { x: 0.5, y: 0.5 }
+        }
+    ]
+};

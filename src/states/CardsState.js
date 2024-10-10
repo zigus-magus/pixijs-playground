@@ -5,6 +5,7 @@ import * as PIXI from "pixi.js";
 export class CardsState extends BaseState {
     CARDS_FLY_INTERVAL = 1000;
     CARD_MOVE_DURATION = 2000;
+    cardMoveIntervalId = null; // Store the interval ID
 
     constructor(stateMachine) {
         super(stateMachine);
@@ -20,13 +21,20 @@ export class CardsState extends BaseState {
     async onEnter() {
         await super.onEnter();
 
+        this.addHomeButton();
         this.createLeftDeck();
         this.addTexts();
+
         this.startMovingCards();
     }
 
     async onExit() {
         await super.onExit();
+
+        if (this.cardMoveIntervalId) {
+            clearInterval(this.cardMoveIntervalId);
+            this.cardMoveIntervalId = null;
+        }
 
         this.leftStack.length = 0;
         this.rightStack.length = 0;
@@ -50,7 +58,7 @@ export class CardsState extends BaseState {
     }
 
     startMovingCards() {
-        setInterval(() => {
+        this.cardMoveIntervalId = setInterval(() => {
             this.moveCardAlongCurve();
         }, this.CARDS_FLY_INTERVAL); // Trigger the movement every 1 second
     }
@@ -92,11 +100,10 @@ export class CardsState extends BaseState {
                     // Animation completes
                     this.rightStack.push(card);
                     this.updateCardCount();
-
                     card.zIndex = this.rightStack.length;
-                    card.parent.sortableChildren = true;
-
-                    // Remove the animation from the list
+                    if (card && card.parent) {
+                        card.parent.sortableChildren = true;
+                    }
                     return false;
                 }
             }

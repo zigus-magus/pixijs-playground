@@ -1,35 +1,24 @@
 <style>
-    /* Reset margin and padding for the body */
     body, html {
         margin: 0;
         padding: 0;
-        overflow: hidden; /* Prevent any scroll bars */
+        overflow: hidden;
     }
 
-    /* The canvas container */
     #canvasContainer {
-        position: relative; /* Relative positioning for the FPS meter */
-        width: 1200px; /* Match the canvas size */
-        height: 800px; /* Match the canvas size */
-        margin: 0; /* Ensure no extra space around the container */
-        padding: 0; /* Ensure no padding inside the container */
+        position: relative;
+        width: 1200px;
+        height: 800px;
+        margin: 0;
+        padding: 0;
     }
 
-    /* The canvas element itself */
     canvas {
         display: block;
-        position: absolute; /* Align the canvas inside the container */
-        top: 0;
-        left: 0;
-        margin: 0;
-    }
-
-    /* FPS meter */
-    .fps-meter {
         position: absolute;
         top: 0;
         left: 0;
-        z-index: 10; /* Ensure the FPS meter is above the canvas */
+        margin: 0;
     }
 </style>
 <script type="module" src="src/game.js"></script>

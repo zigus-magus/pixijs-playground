@@ -1,24 +1,37 @@
 import * as PIXI from 'pixi.js';
 
 export class Button extends PIXI.Container {
-    constructor({ text, x, y }) {
+    constructor({ text, x, y, width, height }, texture) {
         super();
         this.x = x;
         this.y = y;
 
-        const buttonGraphics = new PIXI.Graphics();
-        buttonGraphics.beginFill(0x0000ff);
-        buttonGraphics.drawRect(0, 0, 200, 50);
-        buttonGraphics.endFill();
+        const buttonGraphics = new PIXI.Sprite(texture);
+        buttonGraphics.width = width;
+        buttonGraphics.height = height;
         this.addChild(buttonGraphics);
 
-        const buttonText = new PIXI.Text(text, { fill: 0xffffff });
-        buttonText.anchor.set(0.5);
-        buttonText.x = 100;
-        buttonText.y = 25;
-        this.addChild(buttonText);
+        if (text) {
+            const buttonText = new PIXI.Text(text, { fontFamily: 'Kenney', fill: 0x000000 });
+            buttonText.anchor.set(0.5);
+            buttonText.x = buttonGraphics.width / 2;
+            buttonText.y = buttonGraphics.height / 2 - 2;
+            this.addChild(buttonText);
+        }
 
-        this.eventMode = 'dynamic'; // Updated to use eventMode instead of interactive
-        this.buttonMode = true;
+        buttonGraphics.eventMode = 'dynamic';
+        buttonGraphics.buttonMode = true;
+
+        this.on('pointerdown', () => {
+            this.scale.set(0.95);
+        });
+
+        this.on('pointerup', () => {
+            this.scale.set(1);
+        });
+
+        this.on('pointerupoutside', () => {
+            this.scale.set(1);
+        });
     }
 }

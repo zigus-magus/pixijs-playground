@@ -7,6 +7,26 @@
     {
       "assetName": "card_back",
       "assetPath": "/assets/card_back.png"
+    },
+    {
+      "assetName": "button_narrow",
+      "assetPath": "/assets/button_narrow.png"
+    },
+    {
+      "assetName": "button_wide",
+      "assetPath": "/assets/button_wide.png"
+    },
+    {
+      "assetName": "icon_home_black",
+      "assetPath": "/assets/icon_home_black.png"
+    },
+    {
+      "assetName": "icon_home_white",
+      "assetPath": "/assets/icon_home_white.png"
+    },
+    {
+      "assetName": "kenney_font",
+      "assetPath": "/assets/fonts/kenney.ttf"
     }
   ]
 }

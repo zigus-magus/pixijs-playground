@@ -36,7 +36,7 @@ class GameApplication {
     }
 
     update() {
-        // Game logic goes here, update all game elements.
+
     }
 
     getApp() {

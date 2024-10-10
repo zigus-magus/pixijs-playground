@@ -1,5 +1,6 @@
 import { BaseState } from "./BaseState";
 import { MixedTextImageTool } from "../utils/MixedTextImageTool";
+import {homeButtonConfig} from "../config/Config";
 
 export class TextsState extends BaseState {
     constructor(stateMachine) {
@@ -9,6 +10,7 @@ export class TextsState extends BaseState {
 
     async onEnter() {
         await super.onEnter();
+        this.controller.createSceneObject(homeButtonConfig);
         this.startGeneratingMixedObjects();
     }
 

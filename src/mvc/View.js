@@ -44,6 +44,10 @@ export class GameView {
         this.sceneBuilder.buildScene(config);
     }
 
+    addSceneObject(objectConfig) {
+        this.sceneBuilder.addSceneObject(objectConfig);
+    }
+
     enableButton(name) {
         const buttonContainer = this.getElement(name);
         const button = buttonContainer ? buttonContainer.children[0] : null;
@@ -59,7 +63,7 @@ export class GameView {
         const buttonContainer = this.getElement(name);
         const button = buttonContainer ? buttonContainer.children[0] : null;
         if (button) {
-            button.filters = [new AdjustmentFilter({saturation: 0, brightness: 0.7})];
+            // button.filters = [new AdjustmentFilter({saturation: 0, brightness: 0.7})];
             button.eventMode = 'none';
         } else {
             console.warn(`Button ${name} not found or invalid`);
@@ -70,12 +74,15 @@ export class GameView {
         const buttonContainer = this.getElement(name);
         const button = buttonContainer ? buttonContainer.children[0] : null;
         const storedHandler = this.eventHandlers[name];
+
         if (button) {
+            button.eventMode = 'dynamic'; // Ensure the button is interactive
+            button.buttonMode = true; // Show the hand cursor on hover
             button.on(event, callback);
             if (!storedHandler) {
                 this.eventHandlers[name] = [];
             }
-            storedHandler.push({ event, callback });
+            this.eventHandlers[name].push({ event, callback });
         } else {
             console.warn(`Button ${name} not found or invalid`);
         }
@@ -85,6 +92,7 @@ export class GameView {
         const buttonContainer = this.getElement(name);
         const button = buttonContainer ? buttonContainer.children[0] : null;
         const storedHandler = this.eventHandlers[name];
+        debugger
 
         if (button && storedHandler) {
             const handlerToRemove = callback || storedHandler.callback;

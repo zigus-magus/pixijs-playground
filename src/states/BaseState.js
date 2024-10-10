@@ -1,9 +1,16 @@
-import {SceneBuilder} from "../utils/SceneBuilder";
+import {homeButtonConfig} from "../config/Config";
+import {States} from "../constants/States";
 
 export class BaseState {
     constructor(stateMachine) {
         this.stateMachine = stateMachine;
         this.controller = stateMachine.game.controller;
+    }
+
+    addHomeButton() {
+        this.controller.createSceneObject(homeButtonConfig);
+        this.controller.setButtonHandler(homeButtonConfig.name,
+            () => this.changeState(States.Lobby));
     }
 
     changeState(newState) {

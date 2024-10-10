@@ -16,8 +16,16 @@ export class GameController {
         this.view.removeElement(name, element);
     }
 
-    builtScene(config) {
+    buildScene(config) {
         this.view.buildScene(config);
+    }
+
+    createSceneObject(objectConfig) {
+        this.view.addSceneObject(objectConfig);
+    }
+
+    setButtonHandler(name, callback) {
+        this.view.setButtonHandler(name, callback)
     }
 
     clearScene() {

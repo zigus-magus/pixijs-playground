@@ -1,6 +1,6 @@
 import { BaseState } from "./BaseState";
-import { States } from "../constants/States";
-import { Button } from "../components/Button"; // Assuming you have a Button component
+import {lobbySceneConfig} from "../config/Config";
+import {States} from "../constants/States";
 
 export class LobbyState extends BaseState {
     constructor(stateMachine) {
@@ -9,33 +9,11 @@ export class LobbyState extends BaseState {
 
     async onEnter() {
         await super.onEnter();
+        this.controller.buildScene(lobbySceneConfig);
 
-        this.createButtons();
-    }
-
-    createButtons() {
-        const buttonConfigs = [
-            { text: 'Cards', state: States.Cards },
-            { text: 'Texts', state: States.Texts },
-            { text: 'Particles', state: States.Particles }
-        ];
-
-        const buttonY = 300; // Y position for all buttons
-        const buttonSpacing = 50; // Space between buttons
-
-        buttonConfigs.forEach((config, index) => {
-            const button = new Button({
-                text: config.text,
-                x: 400, // X position (centered)
-                y: buttonY + index * buttonSpacing
-            });
-
-            button.on('pointerdown', () => {
-                this.changeState(config.state);
-            });
-
-            this.controller.addElementToScene(config.text, button);
-        });
+        this.controller.setButtonHandler('CardsButton', () => this.changeState(States.Cards));
+        this.controller.setButtonHandler('TextsButton', () => this.changeState(States.Texts));
+        this.controller.setButtonHandler('ParticlesButton', () => this.changeState(States.Particles));
     }
 
     async onExit() {
