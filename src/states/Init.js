@@ -1,4 +1,4 @@
-import {BaseState} from "./BaseState";
+import {BaseState} from "./Base";
 import {States} from "../constants/States";
 
 export class InitState extends BaseState {
@@ -7,18 +7,18 @@ export class InitState extends BaseState {
     }
 
     async onEnter() {
-        await super.onEnter();
-
         await this.loadAssets();
+        await super.onEnter();
 
         return this.changeState(States.Lobby);
     }
 
     async loadAssets() {
-        await this.controller.assetsLoader.loadAssets('/assetsConfig.json').catch((error) => console.error('Failed to load assets:', error));
+        return this.controller.assetsLoader.loadAssets('/assetsConfig.json')
+            .catch((error) => console.error('Failed to load assets:', error));
     }
 
     async onExit() {
-        await super.onExit();
+        return super.onExit();
     }
 }

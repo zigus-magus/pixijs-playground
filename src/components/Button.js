@@ -1,10 +1,10 @@
 import * as PIXI from 'pixi.js';
 
 export class Button extends PIXI.Container {
-    constructor({ text, x, y, width, height }, texture) {
+    constructor({ text, position, width, height }, texture) {
         super();
-        this.x = x;
-        this.y = y;
+        this.x = position.x;
+        this.y = position.y;
 
         const buttonGraphics = new PIXI.Sprite(texture);
         buttonGraphics.width = width;

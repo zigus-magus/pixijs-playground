@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "@pixi/assets": "^7.4.2",
+    "@pixi/particle-emitter": "^5.0.8",
     "gsap": "^3.12.5",
     "pixi.js": "^7.4.2",
     "stats.js": "^0.17.0"

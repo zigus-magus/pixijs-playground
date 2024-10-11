@@ -10,9 +10,13 @@ class GameApplication {
 
         this.app = new PIXI.Application({ ...initialGameConfig });
         document.getElementById('canvasContainer').appendChild(this.app.view);
-        this.createFPSMeter();
 
         globalThis.__PIXI_APP__ = this.app;
+
+        this.app.ticker.minFPS = 30;
+        this.app.ticker.maxFPS = 60;
+        this.app.ticker.add((delta) => this.update(delta));
+        this.createFPSMeter();
 
         GameApplication.instance = this;
     }

@@ -1,8 +1,8 @@
 import {States} from "../constants/States";
-import {InitState} from "../states/InitState";
+import {InitState} from "../states/Init";
 import {LobbyState} from "../states/Lobby";
 import {TextsState} from "../states/Texts";
-import {CardsState} from "../states/CardsState";
+import {CardsState} from "../states/Cards";
 import {ParticlesState} from "../states/Particles";
 
 export class StateMachine {

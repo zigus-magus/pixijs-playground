@@ -1,7 +1,7 @@
 import {TextField} from "../components/TextField";
 import {Button} from "../components/Button";
-import {Sprite} from "../components/Sprite";
-
+import {SceneSprite} from "../components/SceneSprite";
+import * as PIXI from 'pixi.js';
 
 export class SceneBuilder {
     constructor(assetsLoader, addElementToScene) {
@@ -9,8 +9,9 @@ export class SceneBuilder {
         this.addElementToScene = addElementToScene;
 
         this.builderConfig = {
+            Container: PIXI.Container,
             Button: Button,
-            Sprite: Sprite,
+            SceneSprite: SceneSprite,
             TextField: TextField,
         };
     }

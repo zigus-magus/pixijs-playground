@@ -5,7 +5,8 @@ export class GameController {
     constructor(game) {
         this.assetsLoader = game.assetsLoader;
         this.view = new GameView(game.stage, this.assetsLoader);
-        this.model = new GameModel();
+        this.ticker = game.ticker;
+        //this.model = new GameModel();
     }
 
     addElementToScene(name, element) {
@@ -16,6 +17,18 @@ export class GameController {
         this.view.removeElement(name, element);
     }
 
+    getElement(name) {
+        return this.view.getElement(name);
+    }
+
+    addRandomTextElement() {
+        this.view.addRandomTextElement();
+    }
+
+    setHomeButtonVisibility(visible) {
+        this.view.setHomeButtonVisibility(visible);
+    }
+
     buildScene(config) {
         this.view.buildScene(config);
     }
@@ -24,8 +37,16 @@ export class GameController {
         this.view.addSceneObject(objectConfig);
     }
 
+    getTexture(name) {
+        return this.assetsLoader.getTexture(name);
+    }
+
     setButtonHandler(name, callback) {
         this.view.setButtonHandler(name, callback)
+    }
+
+    removeButtonHandler(name, callback) {
+        this.view.removeButtonHandler(name, callback);
     }
 
     clearScene() {

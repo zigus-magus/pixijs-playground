@@ -1,5 +1,7 @@
 import * as PIXI from 'pixi.js';
 import {SceneBuilder} from "../utils/SceneBuilder";
+import {TextRandomizer} from "../utils/TextRandomizer";
+import gsap from 'gsap';
 
 export class GameView {
     constructor(stage, assetsLoader) {
@@ -18,6 +20,28 @@ export class GameView {
         } else {
             console.error(`Element ${name} is invalid or not a PixiJS DisplayObject`);
             return null;
+        }
+    }
+
+    addRandomTextElement() {
+        const config = TextRandomizer.generateTextFieldConfig();
+        this.addSceneObject(config);
+        this.smoothAppear(config.name);
+    }
+
+    smoothAppear(name, duration = 1) {
+        const element = this.getElement(name);
+        if (element) {
+            element.alpha = 0;
+            gsap.to(element, {
+                alpha: 1,
+                duration: duration,
+                onComplete: () => {
+                    gsap.killTweensOf(element);
+                }
+            });
+        } else {
+            console.warn(`Element ${name} not found or invalid`);
         }
     }
 
@@ -40,6 +64,13 @@ export class GameView {
         return this.elements[name];
     }
 
+    setHomeButtonVisibility(visible) {
+        const homeButton = this.getElement('HomeButton');
+        if (homeButton) {
+            homeButton.visible = visible;
+        }
+    }
+
     buildScene(config) {
         this.sceneBuilder.buildScene(config);
     }
@@ -48,36 +79,12 @@ export class GameView {
         this.sceneBuilder.addSceneObject(objectConfig);
     }
 
-    enableButton(name) {
-        const buttonContainer = this.getElement(name);
-        const button = buttonContainer ? buttonContainer.children[0] : null;
-        if (button) {
-            button.eventMode = 'dynamic';
-            button.filters = [];
-        } else {
-            console.warn(`Button ${name} not found or invalid`);
-        }
-    }
-
-    disableButton(name) {
-        const buttonContainer = this.getElement(name);
-        const button = buttonContainer ? buttonContainer.children[0] : null;
-        if (button) {
-            // button.filters = [new AdjustmentFilter({saturation: 0, brightness: 0.7})];
-            button.eventMode = 'none';
-        } else {
-            console.warn(`Button ${name} not found or invalid`);
-        }
-    }
-
     setButtonHandler(name, callback, event = 'pointerdown') {
         const buttonContainer = this.getElement(name);
         const button = buttonContainer ? buttonContainer.children[0] : null;
         const storedHandler = this.eventHandlers[name];
 
         if (button) {
-            button.eventMode = 'dynamic'; // Ensure the button is interactive
-            button.buttonMode = true; // Show the hand cursor on hover
             button.on(event, callback);
             if (!storedHandler) {
                 this.eventHandlers[name] = [];
@@ -92,7 +99,6 @@ export class GameView {
         const buttonContainer = this.getElement(name);
         const button = buttonContainer ? buttonContainer.children[0] : null;
         const storedHandler = this.eventHandlers[name];
-        debugger
 
         if (button && storedHandler) {
             const handlerToRemove = callback || storedHandler.callback;
@@ -102,14 +108,6 @@ export class GameView {
         } else {
             console.warn(`Button "${name}" not found or invalid, or no handler set`);
         }
-    }
-
-    removeAllButtonHandlers() {
-        for (const name in this.eventHandlers) {
-            this.removeButtonHandler(name);
-        }
-
-        this.eventHandlers = {};
     }
 
     clearScene() {
