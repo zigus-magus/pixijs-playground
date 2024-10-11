@@ -72,7 +72,6 @@ export class CardsState extends BaseState {
                 if (card && card.parent) {
                     card.parent.sortableChildren = true;
                 }
-                this.clearCardMoveInterval();
             }
         });
 
