@@ -14,7 +14,7 @@ export const lobbySceneConfig = {
             text: 'Cards',
             width: 300,
             height: 60,
-            position: { x: 400, y: 300 },
+            position: { x: 450, y: 240 },
             texture: 'button_wide'
         },
         {
@@ -23,7 +23,7 @@ export const lobbySceneConfig = {
             text: 'Texts',
             width: 300,
             height: 60,
-            position: { x: 400, y: 400 },
+            position: { x: 450, y: 360 },
             texture: 'button_wide'
         },
         {
@@ -32,7 +32,7 @@ export const lobbySceneConfig = {
             text: 'Particles',
             width: 300,
             height: 60,
-            position: {x: 400, y: 500, },
+            position: {x: 450, y: 480, },
             texture: 'button_wide'
         }
     ]
