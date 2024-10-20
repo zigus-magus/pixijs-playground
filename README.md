@@ -1,4 +1,4 @@
-# Ancient Games
+# PixiJS Playgdound
 
 Welcome to my PixiJS-based game application, a dynamic creation built with JavaScript and PixiJS, using familiar game development patterns. The heart of the project beats to the rhythm of a **State Machine**, which orchestrates all the separate states and brings structure to the flow of the game. Each state has a clear role and purpose, ensuring that everything fits perfectly into place.
 
